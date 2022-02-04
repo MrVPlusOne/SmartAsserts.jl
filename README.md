@@ -19,17 +19,17 @@ Stacktrace:
 
 Functions with keyword arguments are also supported:
 ```julia
-julia> let a = 1, b = 1.2, rtol=0.1
-           @smart_assert ≈(a, b, atol=0.1; rtol)
+julia> let a = 1.0, rtol=0.1
+           @smart_assert isapprox(a, sin(a), atol=0.05; rtol)
        end
-ERROR: AssertionError: Condition `≈(a, b, atol = 0.1; rtol)` failed due to:
-        `a` evaluates to 1
-        `b` evaluates to 1.2
-        `0.1` evaluates to 0.1
+ERROR: AssertionError: Condition `isapprox(a, sin(a), atol = 0.05; rtol)` failed due to:
+        `a` evaluates to 1.0
+        `sin(a)` evaluates to 0.8414709848078965
+        `0.05` evaluates to 0.05
         `rtol` evaluates to 0.1
 Stacktrace:
  [1] top-level scope
-   @ REPL[158]:2
+   @ REPL[177]:2
 ```
 
 Like `@assert`, you can also provide an additional message as the second argument:
