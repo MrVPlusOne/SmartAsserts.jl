@@ -3,8 +3,11 @@ uuid = "56560af0-ab70-43fe-a531-155d81972b00"
 authors = ["Jiayi Wei <MrVPlusOne@gmail.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+MacroTools = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
+
 [compat]
-julia = "1"
+julia = ">= 1.5"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
