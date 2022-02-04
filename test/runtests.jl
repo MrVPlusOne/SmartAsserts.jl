@@ -13,8 +13,6 @@ using Test
         true
     end
 
-    @smart_assert ≈(1, 1.2, atol=0.1; rtol=0.1)
-
     @test_throws AssertionError begin
         a = 5
         @smart_assert a < 1
@@ -23,6 +21,10 @@ using Test
     @test_throws AssertionError begin
         a = 5
         @smart_assert a < 1 "This should fail. 2a = $(2 * a)"
+    end
+
+    @test_throws AssertionError begin
+        @smart_assert ≈(1, 1.2, atol=0.1; rtol=0.1)
     end
 
     @test begin
