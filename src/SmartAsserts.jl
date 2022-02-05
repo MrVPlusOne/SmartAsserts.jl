@@ -5,6 +5,15 @@ export @smart_assert
 using MacroTools
 using MacroTools: @q
 
+const _ENABLED = Ref(true)
+
+"""
+Config whether new `@smart_assert` macros will be enabled or compiled to a
+no-op.
+"""
+function set_enabled(value::Bool)
+    _ENABLED[] = value
+end
 
 """
 Evaluate a boolean expression, and if it is false, also try to show additional information
@@ -156,18 +165,18 @@ Stacktrace:
 ```
 """
 macro smart_assert(ex, msg=nothing)
+    if !_ENABLED[]
+        return :(nothing)
+    end
+
     has_msg = msg !== nothing
     r_ex = _show_assertion(ex)
 
     @q begin
-        m = @__MODULE__
-        to_disable = isdefined(m, :ENABLE_ASSERTIONS) && !m.ENABLE_ASSERTIONS
-        if !to_disable
-            (result, reason) = $r_ex
-            error_msg = $has_msg ? "$($(esc(msg)))\nCaused by $reason" : reason
-            if !result
-                throw(AssertionError(error_msg))
-            end
+        (result, reason) = $r_ex
+        error_msg = $has_msg ? "$($(esc(msg)))\nCaused by $reason" : reason
+        if !result
+            throw(AssertionError(error_msg))
         end
     end
 end

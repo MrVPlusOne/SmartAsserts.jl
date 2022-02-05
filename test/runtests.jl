@@ -1,4 +1,4 @@
-using SmartAsserts: @smart_assert, @show_assertion, group_function_args
+using SmartAsserts: SmartAsserts, @smart_assert, @show_assertion, group_function_args
 using Test
 
 @testset "SmartAsserts.jl" begin
@@ -56,30 +56,23 @@ using Test
             occursin("`b` evaluates to 3", reason) &&
             occursin("`b - 1` evaluates to 2", reason)
     end
+
+    @test_throws AssertionError begin
+        @smart_assert 1 + 1 == 0 "Should fail"
+    end
 end
 
-module TestA
-    using SmartAsserts
-    using Test
+SmartAsserts.set_enabled(false)
+@testset "Turning off" begin
+    @test begin
+        @smart_assert 1 + 1 == 0 "Should be turned off"
+        true
+    end
+end
 
-    a = 1
-
-    @testset "ENABLE_ASSERTIONS" begin
-        @test_throws AssertionError begin
-            @smart_assert a + 1 == 0 "Should fail"
-        end
-
-        TestA.eval(:(ENABLE_ASSERTIONS = false))
-
-        @test begin
-            @smart_assert a + 1 == 0 "Should be turned off"
-            true
-        end
-
-        TestA.eval(:(ENABLE_ASSERTIONS = true))
-
-        @test_throws AssertionError begin
-            @smart_assert a + 1 == 0 "Should be turned off"
-        end
+SmartAsserts.set_enabled(true)
+@testset "Turning back on" begin
+    @test_throws AssertionError begin
+        @smart_assert 1 + 1 == 0 "Should fail again"
     end
 end

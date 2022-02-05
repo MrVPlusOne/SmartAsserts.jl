@@ -1,7 +1,7 @@
 name = "SmartAsserts"
 uuid = "56560af0-ab70-43fe-a531-155d81972b00"
 authors = ["Jiayi Wei <MrVPlusOne@gmail.com> and contributors"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 MacroTools = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
