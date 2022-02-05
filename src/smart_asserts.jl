@@ -82,6 +82,7 @@ function _show_assertion(ex)
                     [
                         "\t`$ex` evaluates to $val" for
                         (ex, val) in zip($args_q, $args_tuple)
+                        if string(ex) != string(val)
                     ],
                     "\n",
                 )

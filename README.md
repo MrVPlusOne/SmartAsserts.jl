@@ -14,7 +14,6 @@ julia> let a = 5
        end
 ERROR: AssertionError: Condition `a < 1` failed due to:
         `a` evaluates to 5
-        `1` evaluates to 1
 Stacktrace:
  [1] top-level scope
    @ REPL[156]:2
@@ -28,7 +27,6 @@ julia> let a = 1.0, rtol=0.1
 ERROR: AssertionError: Condition `isapprox(a, sin(a), atol = 0.05; rtol)` failed due to:
         `a` evaluates to 1.0
         `sin(a)` evaluates to 0.8414709848078965
-        `0.05` evaluates to 0.05
         `rtol` evaluates to 0.1
 Stacktrace:
  [1] top-level scope
@@ -43,7 +41,6 @@ julia> let a = 5
 ERROR: AssertionError: This should fail. 2a = 10
 Caused by Condition `a < 1` failed due to:
         `a` evaluates to 5
-        `1` evaluates to 1
 Stacktrace:
  [1] top-level scope
    @ REPL[167]:2

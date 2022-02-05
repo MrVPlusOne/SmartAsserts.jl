@@ -43,9 +43,9 @@ using Test
         f_with_kw(a; b, c) = a == b + c
         c = 2
         reason = @show_assertion(f_with_kw(4, b=1; c))[2]
-        occursin("`4` evaluates to 4", reason) &&
+        !occursin("`4` evaluates to 4", reason) &&
             occursin("`c` evaluates to 2", reason) &&
-            occursin("`1` evaluates to 1", reason)
+            !occursin("`1` evaluates to 1", reason)
     end
 
     @test begin
