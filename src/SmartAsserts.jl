@@ -8,8 +8,11 @@ using MacroTools: @q
 const _ENABLED = Ref(true)
 
 """
-Config whether new `@smart_assert` macros will be enabled or compiled to a
-no-op.
+Calling `SmartAsserts.set_enabled(false)` will make all future `@smart_assert` 
+be compiled into no-ops. Hence, simply call this at the beginning of your module 
+to disable all `@smart_asserts` in your project. 
+(You might also want to call `SmartAsserts.set_enabled(true)` at the end of your 
+module to not accidentally turn off others' `@smart_asserts`).
 """
 function set_enabled(value::Bool)
     _ENABLED[] = value
@@ -149,6 +152,9 @@ Currently, additional information will be returned for the following types of ex
 - type asserts: e.g., `Type1 <: Type2`
 
 - comparison expressions: e.g., `a == b <= c + d <= e`
+
+See also [`SmartAsserts.set_enabled`](@ref) on how to disable `@smart_assert`s 
+at compile-time.
 
 ## Examples
 ```julia

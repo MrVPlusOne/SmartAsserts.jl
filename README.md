@@ -77,4 +77,8 @@ For other cases, only the original condition expression will be printed but not 
 
 ## Turning off the assertions (at compile-time)
 
-Calling `SmartAsserts.set_enabled(false)` will make all future `@smart_assert` be compiled into no-ops. Hence, simply calling this at the beginning of your module to disable all `@smart_assert`s in your project. (You might also want to reenable it again at the end of your module to not accidentally turn off others `@smart_asserts`).
+Calling `SmartAsserts.set_enabled(false)` will make all future `@smart_assert` 
+be compiled into no-ops. Hence, simply call this at the beginning of your module 
+to disable all `@smart_asserts` in your project. 
+(You might also want to call `SmartAsserts.set_enabled(true)` at the end of your 
+module to not accidentally turn off others' `@smart_asserts`).
