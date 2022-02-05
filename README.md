@@ -74,3 +74,19 @@ Currently, additional information will be printed out for the following types of
 - comparison expressions: e.g., `a == b <= c + d <= e`
 
 For other cases, only the original condition expression will be printed but not their argument information.
+
+## Turning off the assertions (at compile-time)
+All `@smart_assert`s inside a module `M` can be statically turned off by adding the constant definition `const ENABLE_ASSERTIONS = false` at the beginning of `M`'s body.
+
+For example, no error will be thrown in the following example because when `@smart_assert 1 + 1 == 3` is executed, `ENABLE_ASSERTIONS = false` is already defined inside `M`.
+```julia
+module M
+    using SmartAsserts
+    # this turns off all subsequent @smart_assert calls
+    const ENABLE_ASSERTIONS = false 
+    
+    @smart_assert 1 + 1 == 3
+end
+```
+
+Note that if `ENABLE_ASSERTIONS` is not a compile-time constant, the assertions will still be turned off, but there will be a small overhead since each assertion will have a run-time `if` check in its generated code.

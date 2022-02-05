@@ -160,9 +160,14 @@ macro smart_assert(ex, msg=nothing)
     r_ex = _show_assertion(ex)
 
     @q begin
-        (result, reason) = $r_ex
-        if !result
-            throw(AssertionError($has_msg ? "$($(esc(msg)))\nCaused by $reason" : reason))
+        m = @__MODULE__
+        to_disable = isdefined(m, :ENABLE_ASSERTIONS) && !m.ENABLE_ASSERTIONS
+        if !to_disable
+            (result, reason) = $r_ex
+            error_msg = $has_msg ? "$($(esc(msg)))\nCaused by $reason" : reason
+            if !result
+                throw(AssertionError(error_msg))
+            end
         end
     end
 end

@@ -57,3 +57,29 @@ using Test
             occursin("`b - 1` evaluates to 2", reason)
     end
 end
+
+module TestA
+    using SmartAsserts
+    using Test
+
+    a = 1
+
+    @testset "ENABLE_ASSERTIONS" begin
+        @test_throws AssertionError begin
+            @smart_assert a + 1 == 0 "Should fail"
+        end
+
+        TestA.eval(:(ENABLE_ASSERTIONS = false))
+
+        @test begin
+            @smart_assert a + 1 == 0 "Should be turned off"
+            true
+        end
+
+        TestA.eval(:(ENABLE_ASSERTIONS = true))
+
+        @test_throws AssertionError begin
+            @smart_assert a + 1 == 0 "Should be turned off"
+        end
+    end
+end
