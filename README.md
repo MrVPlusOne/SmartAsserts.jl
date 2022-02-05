@@ -3,7 +3,7 @@
 [![Run tests](https://github.com/MrVPlusOne/SmartAsserts.jl/actions/workflows/test.yml/badge.svg)](https://github.com/MrVPlusOne/SmartAsserts.jl/actions/workflows/test.yml)
 
 
-A `@smart_assert` macro that automatically prints out argument values upon assertion failure, used to replace the standard `@assert`. 
+A `@smart_assert` macro that automatically prints out argument values upon assertion failure, used to replace the standard `@assert`. Unlike `@assert`, these smart assertions can also be easily turned off at compile-time.
 
 ## Example Usages
 
