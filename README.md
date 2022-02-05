@@ -5,6 +5,9 @@
 
 A `@smart_assert` macro that automatically prints out argument values upon assertion failure, used to replace the standard `@assert`. Unlike `@assert`, these smart assertions can also be easily [turned off at compile-time](https://github.com/MrVPlusOne/SmartAsserts.jl#turning-off-the-assertions-at-compile-time).
 
+
+**Note: Most of the functionalities of this package are being integrated into [ArgCheck.jl](https://github.com/jw3126/ArgCheck.jl). Considering using that package instead.**
+
 ## Example Usages
 
 A (failed) binary inequality assertion:
