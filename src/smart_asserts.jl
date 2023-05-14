@@ -174,8 +174,8 @@ macro smart_assert(ex, msg=nothing)
 
     quote
         (result, reason) = $r_ex
-        error_msg = $has_msg ? "$($(esc(msg)))\nCaused by $reason" : reason
         if !result
+            error_msg = $has_msg ? "$($(esc(msg)))\nCaused by $reason" : reason
             throw(AssertionError(error_msg))
         end
     end |> Base.remove_linenums!
