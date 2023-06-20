@@ -1,7 +1,7 @@
 name = "SmartAsserts"
 uuid = "56560af0-ab70-43fe-a531-155d81972b00"
 authors = ["Jiayi Wei <MrVPlusOne@gmail.com> and contributors"]
-version = "0.2.0"
+version = "0.2.1"
 
 [compat]
 julia = "1.5"
